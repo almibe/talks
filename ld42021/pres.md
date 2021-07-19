@@ -33,7 +33,7 @@ marp: true
 
 # Non-Goals
 
- - Walk through step by step setting up software
+ - Walk through step by step setting up software in great detail
  - Go over all the available software working with Linked Data
  - Go over features of application and libraries in depth
 
@@ -157,7 +157,7 @@ Shared Library Dependencies
  - These need to be installed before you are able to use them
  - Every programming language will handle this differently
    - External commands
-   - Build systems
+   - Build systems/file based package managers
 
 ---
 
@@ -409,14 +409,16 @@ endpoint = SPARQLWrapper("http://localhost:3030/categories/sparql")
 
 endpoint.setReturnFormat(JSON)
 
-endpoint.setQuery("""SELECT ?subject ?predicate ?object
+endpoint.setQuery("""SELECT ?subject
                      WHERE {
-                         ?subject ?predicate <http://dbpedia.org/resource/Category:Roguelike_video_games>, <http://dbpedia.org/resource/Category:Open-source_video_games>.
+                         ?subject
+                         <http://purl.org/dc/terms/subject>
+                         <http://dbpedia.org/resource/Category:Roguelike_video_games>, <http://dbpedia.org/resource/Category:Open-source_video_games>.
                      }""")
-                   
+
 result = endpoint.query().convert()
 
-print(json.dumps(result, indent=4))
+print(json.dumps(result, indent=2))
 ```
 
 ---
@@ -429,31 +431,33 @@ And get results like the following
 {
   "head": {
     "vars": [
-      "subject",
-      "predicate",
-      "object"
+      "subject"
     ]
   },
   "results": {
     "bindings": [
       {
-        "predicate": {
-          "type": "uri",
-          "value": "http://purl.org/dc/terms/subject"
-        },
         "subject": {
           "type": "uri",
           "value": "http://dbpedia.org/resource/Angband_(video_game)"
         }
       },
       {
-        "predicate": {
-          "type": "uri",
-          "value": "http://purl.org/dc/terms/subject"
-        },
         "subject": {
           "type": "uri",
           "value": "http://dbpedia.org/resource/Cataclysm:_Dark_Days_Ahead"
+        }
+      },
+      {
+        "subject": {
+          "type": "uri",
+          "value": "http://dbpedia.org/resource/DRL_(video_game)"
+        }
+      },
+      {
+        "subject": {
+          "type": "uri",
+          "value": "http://dbpedia.org/resource/Dungeon_Crawl_Stone_Soup"
         }
       },
   ...
