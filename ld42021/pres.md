@@ -20,13 +20,12 @@ marp: true
  - Common Tasks
  - Overview of Applications
  - Overview of Libraries
- - Demo
 
 ---
 
 # Goals
 
- - Explain why local development can be worth the effort
+ - Explain why working with Linked Data locally is worth the effort
  - Go over some common steps to getting server software running locally
  - Go over some common free & open source software for working with Linked Data
 
@@ -36,6 +35,7 @@ marp: true
 
  - Walk through step by step setting up software
  - Go over all the available software working with Linked Data
+ - Go over features of application and libraries in depth
 
 ---
 
@@ -44,22 +44,25 @@ marp: true
 Since I'm not able to walk through all the steps and possible hiccups involved,
 I've created a `getting-started` channel on the main LD4 slack channel (not the conference one).
 
+Go to
 https://bit.ly/ld4slack
-
 and join the `getting-started` channel.
 
 ---
 
 # Motivation
 
-"Developer experience describes the interactions and feelings that a developer has when working with a body of code in order to meet a specific objective."
-&nbsp;&nbsp;&nbsp;&nbsp;-- from https://www.redhat.com/architect/developer-experience
+```
+Developer experience describes the interactions and feelings that a developer has
+when working with a body of code in order to meet a specific objective.
+    -- from https://www.redhat.com/architect/developer-experience
+```
 
 ---
 
 # Motivation
 
- - Out of all the jobs I've had being able to run production code locally has been one of the largest factors in my day to day job satisfaction.
+ - Out of all the jobs I've had, being able to run production code locally has been one of the largest factors in my day to day job satisfaction.
  * (I know that makes me lucky)
 
 ---
@@ -93,7 +96,7 @@ Benefits of Local Development
 Possible Downsides of Local Development
 
  - Learning curve
- - Requires up front planning
+ - Requires up front planning for developers of said software
    - Better Docs
    - Potentially makes configuration harder for original developers (profiles etc)
    - Could split dependencies too (use X in prd, use Y in dev)
@@ -108,7 +111,7 @@ differences from regular desktop software.
 
  - Dependencies
  - Configuration
- - Start/Stop Mechanisms
+ - Startup/Shutdown Mechanisms
 
 ---
 
@@ -125,7 +128,7 @@ Dependencies
 
 # Common Tasks
 
-Runtimes
+Runtime Dependencies
 
  - Many projects don't ship as a platform specific binary application
  - Applications written in Java, Node.js, and scripting languages like Ruby or Python are common examples
@@ -137,7 +140,7 @@ Runtimes
 
 # Common Tasks
 
-Runtimes
+Runtime Dependencies
 
  - Things like Docker can greatly help manage requirements like these, but also come with their own issues.
  - I'm not going to focus on Docker
@@ -194,7 +197,7 @@ Configuration
 
 # Common Tasks
 
-Start/Stop Mechanisms
+Startup/Shutdown Mechanisms
 
  - Typically running software like this can be different than running normal desktop applications
  - Cross platform applications usually have scripts that need to be ran (typically .sh on MacOS/Linux or .bat on Windows)
@@ -271,8 +274,8 @@ Apache JENA and Fuseki
  - Over 20 years of development most of those within the Apache Software Foundation
  - Written in Java
  - Includes an embedded server (Jetty) so slightly easier to work with than an application that requires an external server like Apache Tomcat
- - Provides an internal triple store called TDB2 but can work with relational databases
- - Supports popular serialization formats, SPARQL, OWL, SHACL, and other projects
+ - Provides an internal triple store called TDB2 but can also work with relational databases
+ - JENA supports popular serialization formats, SPARQL, OWL, SHACL, and other projects
 
 ---
 
@@ -407,9 +410,9 @@ endpoint = SPARQLWrapper("http://localhost:3030/categories/sparql")
 endpoint.setReturnFormat(JSON)
 
 endpoint.setQuery("""SELECT ?subject ?predicate ?object
-                   WHERE {
-                       ?subject ?predicate <http://dbpedia.org/resource/Category:Roguelike_video_games>, <http://dbpedia.org/resource/Category:Open-source_video_games>.
-                   }""")
+                     WHERE {
+                         ?subject ?predicate <http://dbpedia.org/resource/Category:Roguelike_video_games>, <http://dbpedia.org/resource/Category:Open-source_video_games>.
+                     }""")
                    
 result = endpoint.query().convert()
 
