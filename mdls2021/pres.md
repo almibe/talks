@@ -30,6 +30,7 @@ twitter.com/alexmiberry
  * I've always been interested in using graphs to model information
  * So I wanted something that would allow me to use graphs as casually (and potentially universally) as other data formats
  * Something along the lines of spread sheets for knowledge graphs
+   * Not quite a 1:1 comparison though since although both are quite visual I think graphs need more programmatic access, especially when they are densely linked
 
 ---
 
@@ -113,7 +114,7 @@ twitter.com/alexmiberry
 
  * Literals in Ligature are currently pretty minimal
    * String - a utf-8 string
-   * Integer - a 64-bit integer (Java Longs, Rust i64, etc)
+   * Integer - a 64-bit integer (Java's Longs, Rust's i64, etc)
    * Bytes - a byte array
  * I wanted to start with a minimal set, more might be added
 
@@ -132,9 +133,12 @@ twitter.com/alexmiberry
 # Status
 
  * Multiple implementations are being worked on
+   * https://github.com/almibe/ligature-rs
+   * https://github.com/almibe/ligature-scala
  * A specification is also be developed along side implementations
+   * https://github.com/almibe/ligature-specification
  * A scripting language called Wander is being developed as well for interacting with Ligature instances
- * Focus will shift to schema/ontology support after this based on RDFS/SHACL/OWL (aka when the real fun starts)
+ * Soon after this focus will shift to schema/ontology support, roughly based on work from RDFS/SHACL/OWL (aka when the real fun starts)
 
 ---
 
