@@ -30,7 +30,47 @@ twitter.com/alexmiberry
  * I've always been interested in using graphs to model information
  * So I wanted something that would allow me to use graphs as casually (and potentially universally) as other data formats
  * Something along the lines of spread sheets for knowledge graphs
-   * Not quite a 1:1 comparison though since although both are quite visual I think graphs need more programmatic access, especially when they are densely linked
+   * Not a 1:1 comparison though since although both are quite visual I think graphs need more programmatic access, especially when they are densely linked
+
+---
+
+# Example - Visual
+
+![](output.svg)
+
+---
+
+# Example - Dot
+
+```
+digraph G {
+ backend -> mysql1 [ label="dependsOn" ];
+ backend -> solr1 [ label="dependsOn"];
+ mysql1 -> "127.0.0.1:3306" [ label="addr" ];
+ mysql1 -> "8.0" [ label="version" ];
+ solr1 -> "127.0.0.1:8983" [ label = "addr" ];
+ solr1 -> "8.10.0" [ label="version" ];
+ backend -> "127.0.0.1:8888" [ label = "addr" ];
+ frontend -> backend [ label="dependsOn"];
+ frontend -> "127.0.0.1:9999" [ label = "addr" ];
+}
+```
+
+---
+
+# Example - Serialized Ligature
+
+```
+<backend> <dependsOn> <mysql1> <1>
+<backend> <dependsOn> <solr1> <2>
+<mysql1> <addr> "127.0.0.1:3306" <3>
+<mysql1> <version> "8.0" <4>
+<solr1> <addr> "127.0.0.1:8983" <4>
+<solr1> <version> "8.10.0" <5>
+<backend> <addr> "127.0.0.1:8888" <6>
+<frontend> <dependsOn> <backend> <7>
+<frontend> <addr> "127.0.0.1:9999" <8>
+```
 
 ---
 
@@ -49,8 +89,8 @@ twitter.com/alexmiberry
 
  * Much closer to what I want
  * I was first introduced to RDF in class in grad school
- * "Statement" oriented rather than *Document* oriented
- * Has a clear specification with serialization formats, query language, schemas, and ontologies
+ * *Statement* oriented rather than *Document* oriented
+ * Has a clear specification with related serialization formats, a query language, and support for schemas ontologies
  * Multiple implementations
 
 ---
@@ -91,7 +131,7 @@ twitter.com/alexmiberry
 
  * I've decided to support Identifiers as a string that contains only valid URL characters
  * So all valid URLs are Identifiers, but an Identifier doesn't have to be a valid URL
- * Use a URL if you want, use a URN if you want, use a URI if you want, use a regular "variable" name if you want, use a (namespaced) atomic id counter if you want, use a (namespaced) nanoid if you want, use a (namespaced) UUID if you want
+ * Use a URI if you want, use a regular "variable" name if you want, use a (namespaced) atomic id counter if you want, use a (namespaced) nanoid if you want, use a (namespaced) UUID if you want
  * This make Identifiers align with my use case and a lot easier work with in general
  * Also because of the focus on supporting things like nanoid and UUID blank nodes aren't needed
 
@@ -113,6 +153,7 @@ twitter.com/alexmiberry
 # Literals
 
  * Literals in Ligature are currently pretty minimal
+   * Identifier - a Ligature Identifier
    * String - a utf-8 string
    * Integer - a 64-bit integer (Java's Longs, Rust's i64, etc)
    * Bytes - a byte array
@@ -137,7 +178,7 @@ twitter.com/alexmiberry
    * https://github.com/almibe/ligature-scala
  * A specification is also be developed along side implementations
    * https://github.com/almibe/ligature-specification
- * A scripting language called Wander is being developed as well for interacting with Ligature instances
+ * A scripting language called Wander is being developed as well for interacting with Ligature instances (see above repos)
  * Soon after this focus will shift to schema/ontology support, roughly based on work from RDFS/SHACL/OWL (aka when the real fun starts)
 
 ---
