@@ -155,7 +155,7 @@ digraph G {
  * Literals in Ligature are currently pretty minimal
    * Identifier - a Ligature Identifier
    * String - a utf-8 string
-   * Integer - a 64-bit integer (Java's Longs, Rust's i64, etc)
+   * Integer - a 64-bit integer (Java's longs, Rust's i64, etc)
    * Bytes - a byte array
  * I wanted to start with a minimal set, more might be added
 
