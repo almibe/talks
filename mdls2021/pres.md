@@ -88,7 +88,7 @@ digraph G {
 # RDF
 
  * Much closer to what I want
- * I was first introduced to RDF in class in grad school
+ * I was first introduced to RDF in grad school
  * *Statement* oriented rather than *Document* oriented
  * Has a clear specification with related serialization formats, a query language, and support for schemas ontologies
  * Multiple implementations
@@ -120,10 +120,6 @@ digraph G {
    * https://jena.apache.org/documentation/notes/iri.html
  * Since RDF is focused on the Semantic Web simple identifiers don't make sense
  * Since I want to support local only datasets I'm fine with allowing much simpler identifiers
-   * If you plan on linking Ligature datasets you should know that ahead of time and can use URIs or a different scheme if you want\*
-   * If you never plan on linking your dataset then you are free to do whatever\*
-
-\*as long as it is a legal identifier
 
 ---
 
@@ -167,7 +163,10 @@ digraph G {
  * The final position in a quad in Ligature is called the Context
  * Every Statement in a Dataset needs an unique Context
  * This allows for making Statements about Statements
- * Time stamping statements, crediting the source of Statements, noting if a Statement is still valid, pointing to Statements that supersede this one, etc.
+   * Time stamping statements
+   * crediting the source of Statements
+   * noting if a Statement is still valid
+   * pointing to Statements that supersede this one, etc.
 
 ---
 
