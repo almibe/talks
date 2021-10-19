@@ -13,7 +13,6 @@ github.com/almibe
 
  * Briefly explain Ligature
  * Cover how Hexastore and Key-Value Databases fit well with Ligature's Data Model
- * Go over some practical examples
 
 ---
 
