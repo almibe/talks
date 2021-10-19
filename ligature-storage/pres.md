@@ -36,14 +36,14 @@ github.com/almibe
 
 ```
 digraph G {
- backend -> mysql1 [ label="dependsOn" ];
- backend -> solr1 [ label="dependsOn"];
- mysql1 -> "127.0.0.1:3306" [ label="addr" ];
- mysql1 -> "8.0" [ label="version" ];
- solr1 -> "127.0.0.1:8983" [ label = "addr" ];
- solr1 -> "8.10.0" [ label="version" ];
- backend -> "127.0.0.1:8888" [ label = "addr" ];
- frontend -> backend [ label="dependsOn"];
+ backend  -> mysql1           [ label="dependsOn" ];
+ backend  -> solr1            [ label="dependsOn"];
+ mysql1   -> "127.0.0.1:3306" [ label="addr" ];
+ mysql1   -> "8.0"            [ label="version" ];
+ solr1    -> "127.0.0.1:8983" [ label = "addr" ];
+ solr1    -> "8.10.0"         [ label="version" ];
+ backend  -> "127.0.0.1:8888" [ label = "addr" ];
+ frontend -> backend          [ label="dependsOn"];
  frontend -> "127.0.0.1:9999" [ label = "addr" ];
 }
 ```
@@ -53,15 +53,15 @@ digraph G {
 # Example - Serialized Ligature
 
 ```
-<backend> <dependsOn> <mysql1> <1>
-<backend> <dependsOn> <solr1> <2>
-<mysql1> <addr> "127.0.0.1:3306" <3>
-<mysql1> <version> "8.0" <4>
-<solr1> <addr> "127.0.0.1:8983" <4>
-<solr1> <version> "8.10.0" <5>
-<backend> <addr> "127.0.0.1:8888" <6>
-<frontend> <dependsOn> <backend> <7>
-<frontend> <addr> "127.0.0.1:9999" <8>
+<backend>  <dependsOn> <mysql1>         <1>
+<backend>  <dependsOn> <solr1>          <2>
+<mysql1>   <addr>      "127.0.0.1:3306" <3>
+<mysql1>   <version>   "8.0"            <4>
+<solr1>    <addr>      "127.0.0.1:8983" <5>
+<solr1>    <version>   "8.10.0"         <6>
+<backend>  <addr>      "127.0.0.1:8888" <7>
+<frontend> <dependsOn> <backend>        <8>
+<frontend> <addr>      "127.0.0.1:9999" <9>
 ```
 
 ---
