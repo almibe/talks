@@ -208,7 +208,7 @@ digraph G {
 # Ligature
 
   | Key  | Value | Note               |
-  | ---- | ----- | -----=------------ |
+  | ---- | ----- | ------------------ |
   | eavc |       |                    |
   | evac |       |                    |
   | aevc |       | Not always needed  |
