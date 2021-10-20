@@ -2,7 +2,7 @@
 marp: true
 ---
 
-# Storing Ligature's Data Model in Key-Value Database
+# Storing Ligature's Data Model in Key-Value Databases
 
 Alex Michael Berry
 github.com/almibe
@@ -12,7 +12,7 @@ github.com/almibe
 # Overview
 
  * Briefly explain Ligature
- * Cover how Hexastore and Key-Value Databases fit well with Ligature's Data Model
+ * Cover how Hexastore style-architecture and Key-Value Databases fit well with Ligature's Data Model
 
 ---
 
@@ -32,7 +32,7 @@ github.com/almibe
 
 ---
 
-# Example - Dot
+# Example - Graphviz Dot
 
 ```
 digraph G {
@@ -66,11 +66,54 @@ digraph G {
 
 ---
 
+# Graph Databases
+
+ * Really cool, but not really what I'm looking for
+ * Usually client/server focused
+ * Rarely embeddable
+ * Usually just a single implementation (in Java or C++)
+ * Have complicated feature sets that focus on enterprise use cases
+ * Often are document databases where a field in a document can be a link to another document
+
+---
+
+# RDF
+
+ * Much closer to what I want
+ * I was first introduced to RDF in grad school
+ * *Statement* oriented rather than *Document* oriented
+ * Has a clear specification with related serialization formats, a query language, and support for schemas ontologies
+ * Multiple implementations
+
+---
+
+# RDF
+
+ * Still has some issues for what I want to do
+ * Was created for the Semantic Web so its goals don't align with mine
+ * Implementations can still be complex to embed and use
+ * Each implementation can implement a different subset of the various standards
+
+---
+
 # Ligature
 
  * Started as an RDF implementation
  * Original intention was to learn more about RDF through practice
  * Realized there were some changes I could make to RDF to make it fit my personal use cases better
+
+---
+
+# Ligature's Data Model
+
+ * A Ligature instance contains a set of named Datasets
+ * Datasets contain a set of Statements
+ * Statements are represented as following
+
+| Entity     | Attribute  | Value      | Context    |
+| ---------- | ---------- | ---------- | ---------- |
+| Identifier | Identifier | Identifier | Identifier |
+|            |            | Literal    |            |
 
 ---
 
@@ -95,19 +138,6 @@ digraph G {
 
 ---
 
-# Ligature's Data Model
-
- * A Ligature instance contains a set of named Datasets
- * Datasets contain a set of Statements
- * Statements are represented as following
-
-| Entity     | Attribute  | Value      | Context    |
-| ---------- | ---------- | ---------- | ---------- |
-| Identifier | Identifier | Identifier | Identifier |
-|            |            | Literal    |            |
-
----
-
 # Literals
 
  * Literals in Ligature are currently pretty minimal
@@ -126,27 +156,30 @@ digraph G {
  * Every Statement in a Dataset needs an unique Context
  * This allows for making Statements about Statements
    * Time stamping statements
-   * crediting the source of Statements
-   * noting if a Statement is still valid
-   * pointing to Statements that supersede this one, etc.
+   * Crediting the source of Statements
+   * Noting if a Statement is still valid
+   * Pointing to Statements that supersede this one, etc.
 
 ---
 
-# Hexastore
+# Storage
 
-![](hexastore-paper.png)
-
-* A 2008 paper comparing different storage methods for RDF triples, arguing for a method that can be adapted to work with Key-Value Databases
+ * I was looking for a storage model that would be flexible and portable
+ * I wanted it to be optimized for pattern matches
+  * What are all known Attributes for a given Entity?
+  * What Entities have this Attribute?
+  * What are all of values of the Attribute? 
 
 ---
 
 # Key-Value Databases
 
- * Many type of Key-Value Database exist
+ * Many types of Key-Value Database exist
  * For this to work best the following requirements should be met
    * Transactional
-   * Sorted
+   * Ordered
    * Scannable
+   * Work with byte arrays for keys and values
 
 ---
 
@@ -160,24 +193,32 @@ digraph G {
 
 ---
 
-# Hexastore + Key-Value Databases
+# Hexastore
 
-  * A simple view of this approach is for every triple {s,p,o} you store six entries in a Key-Value Database, one for each permutation in the key position
+![](hexastore-paper.png)
 
-  | Key | Value | Note              |
-  | --- | ----- | ----------------- |
-  | spo |       |                   |
-  | sop |       |                   |
-  | pso |       | Not always needed |
-  | pos |       |                   |
-  | osp |       |                   |
-  | ops |       | Not always needed |
+* A 2008 paper comparing different storage methods for RDF triples, arguing for a method that can be adapted to work with Key-Value Databases
 
 ---
 
 # Hexastore + Key-Value Databases
 
- * To get this to work correctly all of the values of {s,p,o} should be fixed length ids instead of the actual value the ids could also include type infomation
+  * A simple view of this approach is for every triple {s,p,o} you store six entries in a Key-Value Database, one for each permutation in the key position
+
+  | Key | Value | Note                           |
+  | --- | ----- | ------------------------------ |
+  | spo |       |                                |
+  | sop |       |                                |
+  | pso |       | Not needed for my initial case |
+  | pos |       |                                |
+  | osp |       | Not needed for my initial case |
+  | ops |       | Not needed for my initial case |
+
+---
+
+# Hexastore + Key-Value Databases
+
+ * To get this to work correctly all of the values of {s,p,o} should be fixed length ids instead of the actual value the ids could also include type information
  * This requires several lookup tables to covert Subjects to Ids and Ids to Subjects
  * Also each entry should be prefixed with a code saying which type of entry it is (SPO = 1, SOP = 2, PSO = 3, POS = 4, etc.)
  * But since all the values are known fixed size and sorted scanning the database allows for quick lookups
@@ -189,7 +230,7 @@ digraph G {
  * Consider you want to find all triples with a given predicate and object value
  * Just find the ids for the predicate and object and then do a scan for all entires with the given prefix
 
-`ENTRY_TYPE + PREDICATE_ID + OBJECT_ID`
+`PRED_OBJ_SUB_ENTRY_ID + PREDICATE_ID + OBJECT_TYPE_ID + OBJECT_ID`
 
  * You can then decode the matching entries to get all the subjects that make up the matching triples
 
@@ -206,14 +247,14 @@ digraph G {
 
 # Ligature
 
-  | Key  | Value | Note               |
-  | ---- | ----- | ------------------ |
-  | eavc |       |                    |
-  | evac |       |                    |
-  | aevc |       | Not always needed  |
-  | avec |       |                    |
-  | veac |       |                    |
-  | vaec |       | Not always needed  |
+  | Key  | Value | Note                            |
+  | ---- | ----- | ------------------------------- |
+  | eavc |       |                                 |
+  | evac |       |                                 |
+  | aevc |       | Not needed for my initial case  |
+  | avec |       |                                 |
+  | veac |       | Not needed for my initial case  |
+  | vaec |       | Not needed for my initial case  |
   | ceav |       | Unique to Ligature |
 
 ---
@@ -229,4 +270,3 @@ digraph G {
 
 Alex Michael Berry
 github.com/almibe
-twitter.com/alexmiberry
