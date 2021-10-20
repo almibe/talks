@@ -124,7 +124,7 @@ digraph G {
  * They are very complicated, and even established libraries like JENA only partially support them
    * https://jena.apache.org/documentation/notes/iri.html
  * Since RDF is focused on the Semantic Web simple identifiers don't make sense
- * Since I want to support local only datasets I'm fine with allowing much simpler identifiers
+ * Since I want to focus on supporting local datasets mainly I'm fine with allowing much simpler identifiers
 
 ---
 
@@ -159,6 +159,7 @@ digraph G {
    * Crediting the source of Statements
    * Noting if a Statement is still valid
    * Pointing to Statements that supersede this one, etc.
+* Maybe a little overlap with RDF*?
 
 ---
 
@@ -251,7 +252,7 @@ digraph G {
 # Lookup Example
 
  * Consider you want to find all Statements with a given Attribute and Literal Value
- * Just find the ids for the Attribute and Value and then do a scan for all entires with the given prefix
+ * Just find the ids for the Attribute and Value and then do a scan for all entries with the given prefix
 
 `STATEMENT_ENTRY + DATASET_ID + AVEC + ATTRIBUTE_ID + VALUE_TYPE_ID + VALUE`
 
@@ -268,7 +269,7 @@ digraph G {
 
 # Conclusion
 
- * Ligature tries to be portable thanks to its simple model
+ * Ligature tries to be portable thanks to its simple data model
  * Key-Value Databases are probably the best fit but Document, Column, and Relational Databases can also be used
 
 ---
