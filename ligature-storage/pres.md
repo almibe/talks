@@ -167,9 +167,9 @@ digraph G {
 
  * I was looking for a storage model that would be flexible and portable
  * I wanted it to be optimized for pattern matches
-  * What are all known Attributes for a given Entity?
-  * What Entities have this Attribute?
-  * What are all of values of the Attribute? 
+   * What are all known Attributes for a given Entity?
+   * What Entities have this Attribute?
+   * What are all of values of the Attribute? 
 
 ---
 
