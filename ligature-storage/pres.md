@@ -12,7 +12,7 @@ github.com/almibe
 # Overview
 
  * Briefly explain Ligature
- * Cover how Hexastore style-architecture and Key-Value Databases fit well with Ligature's Data Model
+ * Cover how Hexastore influenced style-architecture and Key-Value Databases fit well with Ligature's Data Model
 
 ---
 
@@ -256,7 +256,13 @@ digraph G {
 `STATEMENT_ENTRY + DATASET_ID + AVEC + ATTRIBUTE_ID + VALUE_TYPE_ID + VALUE`
 
  * You can then decode the matching entries to get all the Entities that make up the matching Statements
- * So this would work for queries like find all the Entities with the firstName "Robert" in the Dataset Employees
+ * So this would work for queries like find all the Entities with the firstName "Aragorn" in the given Dataset
+
+---
+
+# Aragorn!
+
+![](aragorn.jpg)
 
 ---
 
