@@ -82,7 +82,7 @@ digraph G {
  * Much closer to what I want
  * I was first introduced to RDF in grad school
  * *Statement* oriented rather than *Document* oriented
- * Has a clear specification with related serialization formats, a query language, and support for schemas ontologies
+ * Has a clear specification with related serialization formats, a query language, and support for schemas & ontologies
  * Multiple implementations
 
 ---
@@ -138,13 +138,13 @@ digraph G {
 
 ---
 
-# Literals
+# Values
 
- * Literals in Ligature are currently pretty minimal
+ * Values in Ligature are currently pretty minimal
    * Identifier - a Ligature Identifier
-   * String - a utf-8 string
-   * Integer - a 64-bit integer (Java's longs, Rust's i64, etc)
-   * Bytes - a byte array
+   * String Literal - a utf-8 string
+   * Integer Literal - a 64-bit integer (Java's longs, Rust's i64, etc)
+   * Byte Array Literal - a byte array
  * I wanted to start with a minimal set, more might be added
 
 ---
