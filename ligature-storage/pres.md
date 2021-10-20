@@ -225,17 +225,6 @@ digraph G {
 
 ---
 
-# Lookup Example
-
- * Consider you want to find all triples with a given predicate and object value
- * Just find the ids for the predicate and object and then do a scan for all entires with the given prefix
-
-`PRED_OBJ_SUB_ENTRY_ID + PREDICATE_ID + OBJECT_TYPE_ID + OBJECT_ID`
-
- * You can then decode the matching entries to get all the subjects that make up the matching triples
-
----
-
 # Applying Hexastore to Ligature
 
  * The basics still apply
@@ -255,7 +244,19 @@ digraph G {
   | avec |       |                                 |
   | veac |       | Not needed for my initial case  |
   | vaec |       | Not needed for my initial case  |
-  | ceav |       | Unique to Ligature |
+  | ceav |       | Unique to Ligature              |
+
+---
+
+# Lookup Example
+
+ * Consider you want to find all Statements with a given Attribute and Literal Value
+ * Just find the ids for the Attribute and Value and then do a scan for all entires with the given prefix
+
+`STATEMENT_ENTRY + DATASET_ID + AVEC + ATTRIBUTE_ID + VALUE_TYPE_ID + VALUE`
+
+ * You can then decode the matching entries to get all the Entities that make up the matching Statements
+ * So this would work for queries like find all the Entities with the firstName "Robert" in the Dataset Employees
 
 ---
 
