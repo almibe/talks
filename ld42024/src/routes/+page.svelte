@@ -345,10 +345,10 @@ type Concept = AtomicConcept | ConceptConjunction | ConceptDisjuntion | AtomicNe
                 <p>Fake Typescript</p>
                 <pre><code data-trim data-noescape>
 const res = read("Cat ⊑ Animal, betty: Cat")
-&gt; res = [lbrace; type: "inclusion", left: "Cat", right: "Animal" &rbrace;,
+&gt; res = [&lbrace; type: "inclusion", left: "Cat", right: "Animal" &rbrace;,
 &lbrace; type: "etension", element: "betty", concept: "Cat" &rbrace;]
 const model = interpret(res)
-&gt; model = [lbrace; type: "inclusion", left: "Cat", right: "Animal" &rbrace;,
+&gt; model = [&lbrace; type: "inclusion", left: "Cat", right: "Animal" &rbrace;,
 &lbrace; type: "etension", element: "betty", concept: "Cat" &rbrace;,
 &lbrace; type: "etension", element: "betty", concept: "Animal" &rbrace;]
                 </code></pre>
