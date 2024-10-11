@@ -46,7 +46,9 @@ if (browser) {
                 <p>I'm not assuming you have a background in logic (I don't have one)</p>
                 <p>Basic familiarity with programming (Python, JS, SQL, bash, regex, etc.)</p>
                 <p>Basic familiarity with RDF</p>
-                <p>Not focusing on the Linkded Data side of DL, happy to discuss though</p>
+                <p>Not focusing on the Linked Data side of DL, happy to discuss though</p>
+                <p>Hopefully connections between DL and OWL clear.</p>
+                <p>Minor renaming Concepts instead of Classes and Roles instead of Properties.</p>
             </section>
         </section>
         <section>
@@ -55,13 +57,13 @@ if (browser) {
             </section>
             <section>
                 <h1>What is Description Logic?</h1>
-                <p>A System of Logic Designed for Terminological Knowledge Representation</p>
-                <p>At One Point Called "Terminological Knowledge Representation Languages"</p>
+                <p>A System of Logic Designed to aid in Terminological Knowledge Representation</p>
+                <p>At One Point Called "Terminological Knowledge Representation Languages" or "Concept Languages"</p>
                 <p>Concerned with fomally defining relationships between concepts and roles</p>
                 <p>Still an active area of research <a href="https://dl.kr.org">dl.kr.org</a></p>
             </section>
             <section>
-                <h1>What is Description Logic? (2)</h1>
+                <h1>What are Description Logics?</h1>
                 <p>A family of languages</p>
                 <p>Each provides a different level of expressiveness</p>
                 <p>Names are made up of letters like <img alt="AL written in script" src="/al.svg"> and <img alt="SROIQ^(D) written in script" src="/sroiq(d).svg"></p>
@@ -90,6 +92,7 @@ if (browser) {
             </section>
             <section>
                 <h1>History</h1>
+                <p>This is a little speculative, don't take it too seriously.</p>
                 <p>Developed out of ideas like semantic networks from natural language processing</p>
                 <p>Its big development was adding the separate logic language that let you describe additional relationships beyond what was directly stored in the network</p>
                 <p>Loosely considered part of AI today, but was considered more relevant to AI research in the 80's and 90's</p>
@@ -135,7 +138,7 @@ if (browser) {
                 <h1>TBox</h1>
                 <p>The TBox defines terms such as concept names or role names that are referenced in the ABox</p>
                 <p>These are called concept descriptions and role descriptions.</p>
-                <p>Sometimes Role information is stored in an RBox 🤷‍♀️</p>
+                <p>With description logics that allow for complex role relationships an RBox might also be</p>
                 <code>Cat ⊑ Animal</code>
                 <p>"All Cats are Animals."</p>
             </section>
@@ -148,58 +151,6 @@ if (browser) {
                     <tr><td><code>betty : Cat</code></td></tr>
                 </table>
             </section>
-        </section>
-        <section>
-            <section>
-                <h1>Interpretting Knowledge Bases</h1>
-                <p>Creates a model from a knowledge base</p>
-                <p>Usually expressed as a graph or a table that enumerates all values in a model</p>
-            </section>
-            <section>
-                <h1>Using a Table</h1>
-                <pre><code data-trim data-noescape>
-Cat ⊑ Animal,
-betty : Cat,
-(betty, peggy): sibling
-                </code></pre>
-                <table class="reveal">
-                    <tr><th>∆</th><td>betty, peggy</td></tr>
-                    <tr><th>Cat</th><td>betty</td></tr>
-                    <tr><th>Animal</th><td>betty</td></tr>
-                    <tr><th>sibling</th><td>(betty, peggy)</td></tr>
-                </table>
-            </section>
-            <section>
-                <h1>Using a Graph</h1>
-                <pre><code data-trim data-noescape>
-                    Cat ⊑ Animal,
-                    betty : Cat,
-                    (betty, peggy): sibling
-                </code></pre>
-                <img alt="graph of a node labled betty Animal Cat that points to a node labled Peggy and the arrow is labeled sibling" src="/graphviz.png" />
-            </section>
-            <section>
-                <h1>Consistency</h1>
-                <p>Consistency is very important to DL</p>
-                <p>A Knowledge Base is considered consistent if it does contain any clashes</p>
-                <p>A clash is when an element is said to both be in the extension of a concept and not be in the extension of a concept</p>
-                <p>A simple example</p>
-                <pre><code>
-betty: Cat, 
-betty: ¬Cat
-                </code></pre>
-                <p>A slightly more complex example.</p>
-                <pre><code>
-Cat ⊑ Animal,
-betty: Cat,
-betty: ¬Animal</code></pre>
-                <p>The above only has a clash after inferencing, if you removed the first statement it'd be fine.</p>
-                <pre><code>
-betty: Cat, 
-betty: ¬Animal</code></pre>
-            </section>
-        </section>
-        <section>
             <section>
                 <h1>Defining <img alt="AL written in script" src="/al.svg"></h1>
                 <p>Syntax</p>
@@ -231,6 +182,58 @@ Dog ≡ ¬Cat,
 Animal ≡ ∃dob.⊤ ⊓ ∃name.⊤
                 </code></pre>
             </section>
+        </section>
+        <section>
+            <section>
+                <h1>Interpreting Knowledge Bases</h1>
+                <p>Creates a model from a knowledge base</p>
+                <p>Usually expressed as a graph or a table that enumerates all values in a model</p>
+            </section>
+            <section>
+                <h1>Using a Table</h1>
+                <pre><code data-trim data-noescape>
+Cat ⊑ Animal,
+betty : Cat,
+(betty, peggy): sibling
+                </code></pre>
+                <table class="reveal">
+                    <tr><th>∆</th><td>betty, peggy</td></tr>
+                    <tr><th>Cat</th><td>betty</td></tr>
+                    <tr><th>Animal</th><td>betty</td></tr>
+                    <tr><th>sibling</th><td>(betty, peggy)</td></tr>
+                </table>
+            </section>
+            <section>
+                <h1>Using a Graph</h1>
+                <pre><code data-trim data-noescape>
+Cat ⊑ Animal,
+betty : Cat,
+(betty, peggy): sibling
+                </code></pre>
+                <img alt="graph of a node labled betty Animal Cat that points to a node labled Peggy and the arrow is labeled sibling" src="/graphviz.png" />
+            </section>
+            <section>
+                <h1>Consistency</h1>
+                <p>Consistency is very important to DL</p>
+                <p>A Knowledge Base is considered consistent if it does contain any clashes</p>
+                <p>A clash is when an element is said to both be in the extension of a concept and not be in the extension of a concept</p>
+                <p>A simple example</p>
+                <pre><code>
+betty: Cat, 
+betty: ¬Cat
+                </code></pre>
+                <p>A slightly more complex example.</p>
+                <pre><code>
+Cat ⊑ Animal,
+betty: Cat,
+betty: ¬Animal</code></pre>
+                <p>The above only has a clash after inferencing, if you removed the first statement it'd be fine.</p>
+                <pre><code>
+betty: Cat, 
+betty: ¬Animal</code></pre>
+            </section>
+        </section>
+        <section>
             <section>
                 <h1>Manipulating Concept Languages</h1>
                 <p>Normalization rules let us simplify expressions like</p>
@@ -339,7 +342,7 @@ type Concept = AtomicConcept | ConceptConjunction | ConceptDisjuntion | AtomicNe
                 <p><code>read</code> - read in DL expressions and create datastructures (not needed for simple use cases)</p>
                 <p><code>interpret</code> - take in representations of a TBox and ABox and return a model</p>
                 <p>Possibily also functions to check for completeness, consistency/clashes, etc.</p>
-                <p>Rough Typescript</p>
+                <p>Fake Typescript</p>
                 <pre><code data-trim data-noescape>
 const res = read("Cat ⊑ Animal, betty: Cat")
 &gt; res = [lbrace; type: "inclusion", left: "Cat", right: "Animal" &rbrace;,
