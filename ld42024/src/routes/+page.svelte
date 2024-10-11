@@ -248,7 +248,9 @@ betty: ¬Animal</code></pre>
             <section>
                 <h1>Manipulating Concept Languages (2)</h1>
                 <p>Some more examples</p>
-                <code>Cat ≡ Animal ⊓ Liquid</code>
+                <pre><code data-trim data-noescape>
+Cat ≡ Animal ⊓ Liquid
+                </code></pre>
                 <p>Becomes</p>
                 <pre><code data-trim data-noescape>
 Cat ⊑ Animal ⊓ Liquid
@@ -360,6 +362,13 @@ const model = interpret(res)
                 <p>Targets .NET Core & JS (eventually native and wasm via Rust)</p>
                 <p>MPL 2.0 license</p>
                 <p><a href="https://github.com/almibe/ligature-fs/tree/main/src/tiny-dl">https://github.com/almibe/ligature-fs/tree/main/src/tiny-dl</a></p>
+            </section>
+            <section>
+                <h1>Thank you!</h1>
+                <img height="300" src="betty.png" alt="a small tabby cat" />
+                <p><code>betty: Cat</code></p>
+                <p><a href="https://almibe.dev">almibe.dev</a></p>
+                <p><a href="https://github.com/almibe/talks">github.com/almibe/talks</a></p>
             </section>
         </section>
     </div>
