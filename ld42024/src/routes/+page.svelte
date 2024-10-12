@@ -47,7 +47,7 @@ if (browser) {
                 <p>Basic familiarity with programming (Python, JS, SQL, bash, regex, etc.)</p>
                 <p>Basic familiarity with RDF</p>
                 <p>Not focusing on the Linked Data side of DL, happy to discuss though</p>
-                <p>Hopefully connections between DL and OWL clear.</p>
+                <p>Hopefully connections between DL and OWL are clear.</p>
                 <p>Minor renaming Concepts instead of Classes and Roles instead of Properties.</p>
             </section>
         </section>
@@ -357,7 +357,7 @@ const model = interpret(res)
             </section>
             <section>
                 <h1>tiny-dl</h1>
-                <p>Status: proof of concept</p>
+                <p>Status: proof of concept, still experimenting</p>
                 <p>F# / Rust implementations (mostly F# for now)</p>
                 <p>Targets .NET Core & JS (eventually native and wasm via Rust)</p>
                 <p>MPL 2.0 license</p>
